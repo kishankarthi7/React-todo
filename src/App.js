@@ -44,6 +44,27 @@ export default class App extends React.Component {
     }
   };
 
+  toggleTodo = (todo) =>
+    this.setState({
+      todoItems: this.state.todoItems.map((item) =>
+        item.action === todo.action ? { ...item, done: !item.done } : item,
+      ),
+    });
+
+  todoTableRows = () =>
+    this.state.todoItems.map((item) => (
+      <tr key={item.action}>
+        <td>{item.action}</td>
+        <td>
+          <input
+            type="checkbox"
+            checked={item.done}
+            onChnage={() => this.toggleTodo(item)}
+          />
+        </td>
+      </tr>
+    ));
+
   render() {
     return (
       <div>
